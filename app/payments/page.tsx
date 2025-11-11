@@ -3,10 +3,9 @@ import SearchInput from '@/components/costume-ui/SearchInput'
 import Button from '@/components/costume-ui/Button'
 import {
   AddButtonIcon,
-  DeleteButtonIcon,
-  ImportButtonIcon
+  DeleteButtonIcon
 } from '@/components/costume-ui/Icons'
-import PropertiesTable from '@/components/tables/PropertiesTable'
+import PaymentsTable from '@/components/tables/PaymentsTable'
 
 
 const Properties = () => {
@@ -14,19 +13,13 @@ const Properties = () => {
     <div className={cn('flex flex-col gap-2.5', 'h-full')}>
       {/* Heading */}
       <div>
-        <h1>Properties</h1>
+        <h1>Payments</h1>
       </div>
       {/* Actions */}
       <div className={cn('flex justify-between items-center', 'w-full')}>
-        <SearchInput placeholder='Search properties' />
+        <SearchInput placeholder='Search payments' />
         {/* Buttons */}
         <div className={cn('flex items-center gap-2.5', 'py-5')}>
-          <Button
-            variant='secondary'
-            icon={<ImportButtonIcon className='text-neutral-400' />}
-            label='Import'
-          />
-
           <Button
             icon={<DeleteButtonIcon />}
             label='Delete'
@@ -35,13 +28,13 @@ const Properties = () => {
 
           <Button
             icon={<AddButtonIcon className='text-neutral-300' />}
-            label='Add Property'
+            label='Add Room'
           />
         </div>
       </div>
       {/* Table */}
       <div>
-        <PropertiesTable />
+        <PaymentsTable />
       </div>
     </div>
   )

@@ -33,11 +33,17 @@ import {
   TableRow
 } from '@/components/ui/table'
 import Tooltip from '../costume-ui/Tooltip'
-import { Room } from '@/types'
-import { roomsData } from '@/utils/data'
+import { Payment } from '@/types'
+import { paymentsData } from '@/utils/data'
 import { cn } from '@/lib/utils'
+import { formatDate, formatTimestamp } from '@/utils/formatTime'
+import { Repeat } from 'lucide-react'
+import { formatCurrency } from '@/utils/formatCurrency'
+import { Progress } from '../ui/progress'
+import Image from 'next/image'
+import { UserAvatar } from '@/components/costume-ui/NameAvatar'
 
-export const columns: ColumnDef<Room>[] = [
+export const columns: ColumnDef<Payment>[] = [
   //Checkbox
   {
     id: 'select',
@@ -63,10 +69,17 @@ export const columns: ColumnDef<Room>[] = [
   },
 
   {
-    accessorKey: 'title',
-    header: () => <div className='text-left'>Title</div>,
+    accessorKey: 'type',
+    header: () => <div className='text-left'>Transaction</div>,
     cell: ({ row }) => {
-      return <div className='text-left'>{row.getValue('title')}</div>
+      const { id, type } = row.original
+
+      return (
+        <div>
+          <div className='text-left texts-table-cell-primary'>{'#' + id}</div>
+          <div className='text-left'>{type}</div>
+        </div>
+      )
     }
   },
 
@@ -74,33 +87,131 @@ export const columns: ColumnDef<Room>[] = [
     accessorKey: 'property',
     header: () => <div className='text-left'>Property</div>,
     cell: ({ row }) => {
-      return <div className='text-left'>{row.getValue('property')}</div>
+      const { property, room } = row.original
+
+      return (
+        <div>
+          <div className='text-left texts-table-cell-primary'>{property}</div>
+          <div className='text-left texts-table-cell-secondary'>{room}</div>
+        </div>
+      )
     }
   },
 
   {
-    accessorKey: 'status',
-    header: () => <div className='text-left'>Status</div>,
+    accessorKey: 'due_date',
+    header: () => <div className='text-left'>Due Date</div>,
     cell: ({ row }) => {
-      const rawStatus: Room['status'] = row.getValue('status') // e.g., "Under Preparation"
+      const { due_date, recurring_pattern, recurring_pattern_description } =
+        row.original
+      const rawPattern: Payment['recurring_pattern'] = recurring_pattern
+      const patternKey = rawPattern.toLowerCase().replace(/\s/g, '-')
+
+      return (
+        <>
+          <div className='text-left mb-1'>{formatDate(due_date)}</div>
+          <div
+            data-pattern={patternKey}
+            className={cn(
+              'flex items-center gap-[5]',
+              'text-left texts-table-cell-secondary',
+              'data-[pattern=one-time]:bg-neutral-100 data-[pattern=one-time]:text-(--text-secondary)',
+              'data-[pattern=recurring]:bg-(--info-light) data-[pattern=recurring]:text-(--info-main)',
+              'py-[3px] px-2 w-fit',
+              'rounded-full select-none'
+            )}
+          >
+            {patternKey === 'recurring' ? (
+              <>
+                <Tooltip
+                  variant='description'
+                  content={recurring_pattern_description}
+                  className='flex items-center gap-[5]'
+                >
+                  <Repeat strokeWidth={2} size={12} />
+                  {recurring_pattern}
+                </Tooltip>
+              </>
+            ) : (
+              recurring_pattern
+            )}
+          </div>
+        </>
+      )
+    }
+  },
+
+  {
+    accessorKey: 'amount',
+    header: () => <div className='text-left'>Amount</div>,
+    cell: ({ row }) => {
+      const { amount, status } = row.original
+      const rawStatus: Payment['status'] = status // e.g., "Under Preparation"
       const statusKey = rawStatus.toLowerCase().replace(/\s/g, '-') // "under-preparation"
 
       return (
-        <div className='texts-table-cell-primary text-left'>
-          <div
-            data-status={statusKey}
-            className={cn(
-              'flex items-center justify-center',
-              'w-fit p-[5] px-2.5',
-              'rounded-md select-none',
-              'data-[status=occupied]:bg-green-100 data-[status=occupied]:text-green-800',
-              'data-[status=under-preparation]:bg-yellow-100 data-[status=under-preparation]:text-yellow-800',
-              'data-[status=pending-inspection]:bg-orange-100 data-[status=pending-inspection]:text-orange-800',
-              'data-[status=vacant]:bg-gray-100 data-[status=vacant]:text-gray-800',
-              'data-[status=property-rented]:bg-blue-100 data-[status=property-rented]:text-blue-800'
-            )}
-          >
-            {row.getValue('status')}
+        <>
+          <div className='texts-body-large-medium text-left mb-1'>{amount}</div>
+          <div className='texts-table-cell-primary text-left'>
+            <div
+              data-status={statusKey}
+              className={cn(
+                'flex items-center justify-center',
+                'w-fit p-[5] px-2.5',
+                'rounded-md select-none',
+                'data-[status=paid]:bg-green-100 data-[status=paid]:text-green-800',
+                'data-[status=paid-late]:bg-yellow-100 data-[status=paid-late]:text-yellow-800',
+                'data-[status=pending]:bg-gray-100 data-[status=pending]:text-gray-800',
+                'data-[status=overdue]:bg-red-100 data-[status=overdue]:text-red-800'
+              )}
+            >
+              {status}
+            </div>
+          </div>
+        </>
+      )
+    }
+  },
+
+  {
+    accessorKey: 'payment_percentage',
+    header: () => <div className='text-left'>Payment & Tenant</div>,
+    cell: ({ row }) => {
+      const {
+        amount,
+        payment_percentage,
+        tenant_name,
+        tenant_picture,
+        latest_payment_timestamp
+      } = row.original
+      const remaindingAmount = amount * (payment_percentage / 100)
+
+      return (
+        <div>
+          <>
+            <>
+              <div className='flex items-center justify-between mb-1'>
+                <div className='text-left texts-caption-large mr-4'>
+                  {payment_percentage}% Paid
+                </div>
+                <div className='text-left texts-caption-small text-(--text-secondary)'>
+                  {formatCurrency(remaindingAmount)} remaining
+                </div>
+              </div>
+              <Progress value={payment_percentage} />
+            </>
+          </>
+          <div className='flex items-end mt-2'>
+            <div className={cn('flex items-center gap-[5]', 'text-left')}>
+              <UserAvatar name={tenant_name} size={30} />
+
+              <div className='flex flex-col'>
+                <span className='texts-table-cell-primary'>{tenant_name}</span>
+                <span className='texts-caption-large text-(--text-secondary)'>
+                  {formatTimestamp(latest_payment_timestamp)}
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       )
@@ -147,7 +258,7 @@ export default function PropertiesTable () {
   const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
-    data: roomsData,
+    data: paymentsData,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,

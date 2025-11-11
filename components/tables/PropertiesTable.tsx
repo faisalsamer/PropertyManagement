@@ -122,12 +122,12 @@ export const columns: ColumnDef<Property>[] = [
             className={cn(
               'flex items-center justify-center',
               'w-fit p-[5] px-2.5',
-              'rounded-md',
-                  'data-[status=occupied]:bg-green-100 data-[status=occupied]:text-green-800',
-    'data-[status=under-preparation]:bg-yellow-100 data-[status=under-preparation]:text-yellow-800',
-    'data-[status=pending-inspection]:bg-orange-100 data-[status=pending-inspection]:text-orange-800',
-    'data-[status=vacant]:bg-gray-100 data-[status=vacant]:text-gray-800',
-    'data-[status=property-rented]:bg-blue-100 data-[status=property-rented]:text-blue-800'
+              'rounded-md select-none',
+              'data-[status=occupied]:bg-green-100 data-[status=occupied]:text-green-800',
+              'data-[status=under-preparation]:bg-yellow-100 data-[status=under-preparation]:text-yellow-800',
+              'data-[status=pending-inspection]:bg-orange-100 data-[status=pending-inspection]:text-orange-800',
+              'data-[status=vacant]:bg-gray-100 data-[status=vacant]:text-gray-800',
+              'data-[status=property-rented]:bg-blue-100 data-[status=property-rented]:text-blue-800'
             )}
           >
             {row.getValue('status')}

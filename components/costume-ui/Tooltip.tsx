@@ -13,9 +13,16 @@ type Props = {
   className?: string
   content: string
   maxWidth?: string // optional max width for truncation
+  variant?: 'turnicate' | 'description'
 }
 
-const HoverTooltip = ({ children, content, maxWidth = '200px', className = '' }: Props) => {
+const HoverTooltip = ({
+  children,
+  content,
+  maxWidth = '200px',
+  className = '',
+  variant = 'turnicate'
+}: Props) => {
   const ref = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<number | undefined>(undefined)
   const [showTooltip, setShowTooltip] = useState(false)
@@ -34,6 +41,25 @@ const HoverTooltip = ({ children, content, maxWidth = '200px', className = '' }:
       timeoutRef.current = undefined
     }
     setShowTooltip(false)
+  }
+
+  if (variant === 'description') {
+    return (
+      <TooltipProvider>
+        <ShadcnTooltip open={showTooltip}>
+          <TooltipTrigger
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            asChild
+          >
+            <div className={className}>{children}</div>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{content}</p>
+          </TooltipContent>
+        </ShadcnTooltip>
+      </TooltipProvider>
+    )
   }
 
   return (

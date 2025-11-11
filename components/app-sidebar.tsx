@@ -40,7 +40,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 export default function AppSidebar () {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({})
   const [sidebarHovered, setSidebarHovered] = useState<boolean>(false)
   const { open: isSidebarOpen } = useSidebar()
   const pathname = usePathname()
@@ -74,13 +74,14 @@ export default function AppSidebar () {
       width: 'w-5.5!',
       subMenu: [
         { label: 'Properties', href: '/properties' },
-        { label: 'Rooms' }
+        { label: 'Rooms', href: '/rooms' }
       ]
     },
     {
       icon: TransactionsIcon,
       label: 'Transactions',
-      width: 'w-6!'
+      width: 'w-5!',
+      subMenu: [{ label: 'Payments', href: '/payments' }, { label: 'Expenses' }]
     },
     {
       icon: PoepleIcon,
@@ -216,9 +217,11 @@ export default function AppSidebar () {
                 if (hasSubMenu) {
                   return (
                     <Collapsible
-                      key={item.label}
-                      open={isMenuOpen}
-                      onOpenChange={setIsMenuOpen}
+                      key={`collapsible-${index}-${item.label}`}
+                      open={!!openMenus[item.label]}
+                      onOpenChange={open =>
+                        setOpenMenus(prev => ({ ...prev, [item.label]: open }))
+                      }
                     >
                       <CollapsibleTrigger asChild>
                         <SidebarMenuButton
@@ -246,7 +249,7 @@ export default function AppSidebar () {
                           <svg
                             className={cn(
                               'w-4 h-4 transition-transform duration-200',
-                              isMenuOpen && 'rotate-90'
+                              !!openMenus[item.label] && 'rotate-90'
                             )}
                             fill='none'
                             stroke='currentColor'
@@ -262,10 +265,13 @@ export default function AppSidebar () {
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
                       <CollapsibleContent className='mt-1 ml-4 space-y-1'>
-                        {item.subMenu?.map(subItem => {
+                        {item.subMenu?.map((subItem, subIndex) => {
                           const isSubItemActive = pathname === subItem.href
                           return (
-                            <SidebarMenuButton key={subItem.label} asChild>
+                            <SidebarMenuButton
+                              key={`${item.label}-${subIndex}`}
+                              asChild
+                            >
                               <Link
                                 href={subItem.href || '/'}
                                 onClick={e => {
@@ -351,10 +357,10 @@ export default function AppSidebar () {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className='gap-2.5'>
-              {helpItemContent.map(item => {
+              {helpItemContent.map((item, index) => {
                 const isActive = pathname === item.href
                 return (
-                  <SidebarMenuItem key={item.label} className='px-0!'>
+                  <SidebarMenuItem key={index} className='px-0!'>
                     <SidebarMenuButton
                       className={cn(
                         `${
