@@ -1,13 +1,13 @@
 import { cn } from '@/lib/utils'
-import SearchInput from '@/components/costume-ui/SearchInput'
-import Button from '@/components/costume-ui/Button'
+import SearchInput from '@/components/costume-ui/search-input'
+import Button from '@/components/costume-ui/button'
 import {
   AddButtonIcon,
   DeleteButtonIcon,
   ImportButtonIcon
-} from '@/components/costume-ui/Icons'
+} from '@/components/costume-ui/icon'
 import PropertiesTable from '@/components/tables/PropertiesTable'
-
+import Link from 'next/link'
 
 const Properties = () => {
   return (
@@ -33,10 +33,12 @@ const Properties = () => {
             className='bg-(--error-main)!'
           />
 
-          <Button
-            icon={<AddButtonIcon className='text-neutral-300' />}
-            label='Add Property'
-          />
+          <Link href='/properties/add-property'>
+            <Button
+              icon={<AddButtonIcon className='text-neutral-300' />}
+              label='Add Property'
+            />
+          </Link>
         </div>
       </div>
       {/* Table */}

@@ -1,4 +1,16 @@
-import { Payment, Project, Property, Room } from '@/types'
+import type {
+  Expense,
+  Notice,
+  Owner,
+  Payment,
+  Project,
+  Property,
+  Room,
+  Staff,
+  Task,
+  Tenant,
+  Ticket
+} from '@/types'
 
 export const projectsData: Project[] = [
   {
@@ -455,3 +467,639 @@ export const paymentsData: Payment[] = [
     latest_payment_timestamp: '2025-11-05T10:15:00Z'
   }
 ]
+
+export const expensesData: Expense[] = [
+  {
+    id: '1',
+    type: 'Rent',
+    property: 'Sunrise Apartments',
+    due_date: new Date('2025-11-15'),
+    recurring_pattern: 'Recurring',
+    recurring_pattern_description: 'Monthly on the 15th',
+    amount: 1200,
+    status: 'Paid',
+    payment_percentage: 25
+  },
+  {
+    id: '2',
+    type: 'Maintenance Fee',
+    property: 'Sunrise Apartments',
+    recurring_pattern: 'One-time',
+    recurring_pattern_description: 'Annual maintenance fee',
+    amount: 150,
+    status: 'Pending',
+    payment_percentage: 25
+  },
+  {
+    id: '3',
+    type: 'Rent',
+    property: 'Maple Residency',
+    due_date: new Date('2025-11-01'),
+    recurring_pattern: 'Recurring',
+    recurring_pattern_description: 'Monthly on the 1st',
+    amount: 2000,
+    status: 'Paid Late',
+    payment_percentage: 25
+  },
+  {
+    id: '4',
+    type: 'Utilities',
+    property: 'Ocean View',
+    due_date: new Date('2025-11-12'),
+    recurring_pattern: 'One-time',
+    recurring_pattern_description: 'Monthly utilities bill',
+    amount: 180,
+    status: 'Overdue',
+    payment_percentage: 25
+  },
+  {
+    id: '5',
+    type: 'Rent',
+    property: 'Skyline Towers',
+    due_date: new Date('2025-11-10'),
+    recurring_pattern: 'Recurring',
+    recurring_pattern_description: 'Monthly on the 10th',
+    amount: 1500,
+    status: 'Pending',
+    payment_percentage: 25
+  }
+]
+
+export const tenantsData: Tenant[] = [
+  {
+    id: 't1',
+    tenant_name: 'John Doe',
+    tenant_picture: '/avatar/john.png',
+    identity_no: 'A12345678',
+    phone_no: '+1234567890',
+    email: 'john.doe@example.com',
+    account_status: 'Activated',
+    rental_status: 'Renting'
+  },
+  {
+    id: 't2',
+    tenant_name: 'Jane Smith',
+    tenant_picture: '/avatar/jane.png',
+    identity_no: 'B98765432',
+    phone_no: '+1987654321',
+    email: 'jane.smith@example.com',
+    account_status: 'Pending Activation',
+    rental_status: 'Booking'
+  },
+  {
+    id: 't3',
+    tenant_name: 'Michael Johnson',
+    tenant_picture: '/avatar/michael.png',
+    identity_no: 'C56781234',
+    phone_no: '+1123456789',
+    email: 'michael.johnson@example.com',
+    account_status: 'Activated',
+    rental_status: 'Pending Refund'
+  },
+  {
+    id: 't4',
+    tenant_name: 'Emily Davis',
+    tenant_picture: '/avatar/emily.png',
+    identity_no: 'D87654321',
+    phone_no: '+1098765432',
+    email: 'emily.davis@example.com',
+    account_status: 'Activated',
+    rental_status: 'Not Renting'
+  },
+  {
+    id: 't5',
+    tenant_name: 'William Brown',
+    tenant_picture: '/avatar/william.png',
+    identity_no: 'E23456789',
+    phone_no: '+1012345678',
+    email: 'william.brown@example.com',
+    account_status: 'Pending Activation',
+    rental_status: 'Renting'
+  },
+  {
+    id: 't6',
+    tenant_name: 'Olivia Wilson',
+    tenant_picture: '/avatar/olivia.png',
+    identity_no: 'F34567890',
+    phone_no: '+1098765432',
+    email: 'olivia.wilson@example.com',
+    account_status: 'Activated',
+    rental_status: 'Booking'
+  },
+  {
+    id: 't7',
+    tenant_name: 'James Taylor',
+    tenant_picture: '/avatar/james.png',
+    identity_no: 'G45678901',
+    phone_no: '+1230984567',
+    email: 'james.taylor@example.com',
+    account_status: 'Activated',
+    rental_status: 'Pending Refund'
+  },
+  {
+    id: 't8',
+    tenant_name: 'Sophia Martinez',
+    tenant_picture: '/avatar/sophia.png',
+    identity_no: 'H56789012',
+    phone_no: '+1987345612',
+    email: 'sophia.martinez@example.com',
+    account_status: 'Pending Activation',
+    rental_status: 'Not Renting'
+  },
+  {
+    id: 't9',
+    tenant_name: 'Benjamin Anderson',
+    tenant_picture: '/avatar/benjamin.png',
+    identity_no: 'I67890123',
+    phone_no: '+1203948576',
+    email: 'benjamin.anderson@example.com',
+    account_status: 'Activated',
+    rental_status: 'Renting'
+  },
+  {
+    id: 't10',
+    tenant_name: 'Mia Thomas',
+    tenant_picture: '/avatar/mia.png',
+    identity_no: 'J78901234',
+    phone_no: '+1092837465',
+    email: 'mia.thomas@example.com',
+    account_status: 'Pending Activation',
+    rental_status: 'Booking'
+  }
+]
+
+export const ownersData: Owner[] = [
+  {
+    id: 'owner-1',
+    owner_name: 'Alice Johnson',
+    owner_picture: '/avatars/owner1.png',
+    phone_no: '+1 555-123-4567',
+    email: 'alice.johnson@example.com',
+    property_count: 5
+  },
+  {
+    id: 'owner-2',
+    owner_name: 'Bob Smith',
+    owner_picture: '/avatars/owner2.png',
+    phone_no: '+1 555-987-6543',
+    email: 'bob.smith@example.com',
+    property_count: 2
+  },
+  {
+    id: 'owner-3',
+    owner_name: 'Carol Lee',
+    owner_picture: '/avatars/owner3.png',
+    phone_no: '+1 555-234-5678',
+    email: 'carol.lee@example.com',
+    property_count: 3
+  },
+  {
+    id: 'owner-4',
+    owner_name: 'David Martinez',
+    owner_picture: '/avatars/owner4.png',
+    phone_no: '+1 555-345-6789',
+    email: 'david.martinez@example.com',
+    property_count: 4
+  },
+  {
+    id: 'owner-5',
+    owner_name: 'Eva Brown',
+    owner_picture: '/avatars/owner5.png',
+    phone_no: '+1 555-456-7890',
+    email: 'eva.brown@example.com',
+    property_count: 1
+  },
+  {
+    id: 'owner-6',
+    owner_name: 'Frank Wilson',
+    owner_picture: '/avatars/owner6.png',
+    phone_no: '+1 555-567-8901',
+    email: 'frank.wilson@example.com',
+    property_count: 6
+  }
+]
+
+export const staffData: Staff[] = [
+  {
+    id: 'staff-1',
+    staff_name: 'John Doe',
+    phone_no: '+1 555-111-2222',
+    email: 'john.doe@example.com',
+    role: 'Property Manager'
+  },
+  {
+    id: 'staff-2',
+    staff_name: 'Jane Smith',
+    phone_no: '+1 555-333-4444',
+    email: 'jane.smith@example.com',
+    role: 'Leasing Agent'
+  },
+  {
+    id: 'staff-3',
+    staff_name: 'Michael Brown',
+    phone_no: '+1 555-555-6666',
+    email: 'michael.brown@example.com',
+    role: 'Maintenance Supervisor'
+  },
+  {
+    id: 'staff-4',
+    staff_name: 'Emily Davis',
+    phone_no: '+1 555-777-8888',
+    email: 'emily.davis@example.com',
+    role: 'Accountant'
+  },
+  {
+    id: 'staff-5',
+    staff_name: 'William Johnson',
+    phone_no: '+1 555-999-0000',
+    email: 'william.johnson@example.com',
+    role: 'Front Desk'
+  },
+  {
+    id: 'staff-6',
+    staff_name: 'Olivia Martinez',
+    phone_no: '+1 555-123-4567',
+    email: 'olivia.martinez@example.com',
+    role: 'Leasing Agent'
+  },
+  {
+    id: 'staff-7',
+    staff_name: 'James Wilson',
+    phone_no: '+1 555-234-5678',
+    email: 'james.wilson@example.com',
+    role: 'Maintenance Technician'
+  },
+  {
+    id: 'staff-8',
+    staff_name: 'Sophia Taylor',
+    phone_no: '+1 555-345-6789',
+    email: 'sophia.taylor@example.com',
+    role: 'Property Manager'
+  }
+]
+
+export const ticketsData: Ticket[] = [
+  {
+    id: 't1',
+    type: 'Maintenance',
+    title: 'Leaky faucet in kitchen',
+    description: 'The kitchen faucet is leaking constantly.',
+    property: 'Maple Residency',
+    room: '101',
+    tenant_name: 'Alice Johnson',
+    tenant_picture: '/avatar/alice.png',
+    issue_timestamp: '2025-11-10T08:15:00.000Z',
+    staff_name: 'Bob Smith',
+    staff_picture: '/avatar/bob.png',
+    assignment_timestamp: '2025-11-10T09:00:00.000Z',
+    status: 'In Progress'
+  },
+  {
+    id: 't2',
+    type: 'Maintenance',
+    title: 'Air conditioner not cooling',
+    description: 'AC in living room is not producing cold air.',
+    property: 'Oakwood Apartments',
+    room: 'Whole unit',
+    tenant_name: 'John Doe',
+    tenant_picture: '/avatar/john.png',
+    issue_timestamp: '2025-11-09T14:30:00.000Z',
+    staff_name: 'Clara Lee',
+    staff_picture: '/avatar/clara.png',
+    assignment_timestamp: '2025-11-09T15:00:00.000Z',
+    status: 'Open'
+  },
+  {
+    id: 't3',
+    type: 'Maintenance',
+    title: 'Broken window lock',
+    description: 'Bedroom window lock is broken, cannot secure window.',
+    property: 'Pine View',
+    room: '202',
+    tenant_name: 'Michael Brown',
+    tenant_picture: '/avatar/michael.png',
+    issue_timestamp: '2025-11-08T10:20:00.000Z',
+    staff_name: 'Emma Davis',
+    staff_picture: '/avatar/emma.png',
+    assignment_timestamp: '2025-11-08T11:00:00.000Z',
+    status: 'Resolved'
+  },
+  {
+    id: 't4',
+    type: 'Maintenance',
+    title: 'Internet not working',
+    description: 'WiFi in apartment keeps disconnecting.',
+    property: 'Maple Residency',
+    room: '103',
+    tenant_name: 'Sara Wilson',
+    tenant_picture: '/avatar/sara.png',
+    issue_timestamp: '2025-11-10T12:00:00.000Z',
+    staff_name: 'Bob Smith',
+    staff_picture: '/avatar/bob.png',
+    assignment_timestamp: '2025-11-10T12:30:00.000Z',
+    status: 'In Progress'
+  },
+  {
+    id: 't5',
+    type: 'Maintenance',
+    title: 'Water heater not working',
+    description: 'No hot water in the bathroom.',
+    property: 'Oakwood Apartments',
+    room: 'Whole unit',
+    tenant_name: 'Emma Johnson',
+    tenant_picture: '/avatar/emma2.png',
+    issue_timestamp: '2025-11-07T07:45:00.000Z',
+    staff_name: 'Clara Lee',
+    staff_picture: '/avatar/clara.png',
+    assignment_timestamp: '2025-11-07T08:15:00.000Z',
+    status: 'Pending Tenant Confirmation'
+  },
+  {
+    id: 't6',
+    type: 'Complaint',
+    title: 'Stained carpet',
+    description: 'Living room carpet has large stain from previous spill.',
+    property: 'Pine View',
+    room: '301',
+    tenant_name: 'David Lee',
+    tenant_picture: '/avatar/david.png',
+    issue_timestamp: '2025-11-06T16:50:00.000Z',
+    staff_name: 'Emma Davis',
+    staff_picture: '/avatar/emma.png',
+    assignment_timestamp: '2025-11-06T17:20:00.000Z',
+    status: 'Closed'
+  },
+  {
+    id: 't7',
+    type: 'Maintenance',
+    title: 'Door handle broken',
+    description: 'Front door handle is loose and comes off.',
+    property: 'Maple Residency',
+    room: '105',
+    tenant_name: 'Olivia Martinez',
+    tenant_picture: '/avatar/olivia.png',
+    issue_timestamp: '2025-11-09T09:10:00.000Z',
+    staff_name: 'Bob Smith',
+    staff_picture: '/avatar/bob.png',
+    assignment_timestamp: '2025-11-09T09:45:00.000Z',
+    status: 'Resolved'
+  },
+  {
+    id: 't8',
+    type: 'Maintenance',
+    title: 'Leaking ceiling',
+    description: 'Water dripping from ceiling in bedroom.',
+    property: 'Oakwood Apartments',
+    room: '203',
+    tenant_name: 'Liam Thomas',
+    tenant_picture: '/avatar/liam.png',
+    issue_timestamp: '2025-11-08T18:20:00.000Z',
+    staff_name: 'Clara Lee',
+    staff_picture: '/avatar/clara.png',
+    assignment_timestamp: '2025-11-08T18:50:00.000Z',
+    status: 'In Progress'
+  },
+  {
+    id: 't9',
+    type: 'Maintenance',
+    title: 'Malfunctioning oven',
+    description: 'Oven temperature fluctuates unexpectedly.',
+    property: 'Pine View',
+    room: 'Whole unit',
+    tenant_name: 'Sophia Anderson',
+    tenant_picture: '/avatar/sophia.png',
+    issue_timestamp: '2025-11-07T11:30:00.000Z',
+    staff_name: 'Emma Davis',
+    staff_picture: '/avatar/emma.png',
+    assignment_timestamp: '2025-11-07T12:00:00.000Z',
+    status: 'Open'
+  },
+  {
+    id: 't10',
+    type: 'Complaint',
+    title: 'Noisy neighbors',
+    description: 'Neighbors making loud noises late at night.',
+    property: 'Maple Residency',
+    room: '104',
+    tenant_name: 'Ethan Scott',
+    tenant_picture: '/avatar/ethan.png',
+    issue_timestamp: '2025-11-10T22:15:00.000Z',
+    staff_name: 'Bob Smith',
+    staff_picture: '/avatar/bob.png',
+    assignment_timestamp: '2025-11-10T22:45:00.000Z',
+    status: 'Pending Tenant Confirmation'
+  }
+]
+
+export const tasksData: Task[] = [
+  {
+    id: '1',
+    type: 'Maintenance',
+    title: 'Air Conditioner Repair',
+    description: 'The AC in Room 204 is not cooling properly.',
+    property: 'Sunrise Apartments',
+    room: 'Room 204',
+    issued_by: 'James Carter',
+    issuer_picture: 'https://randomuser.me/api/portraits/men/12.jpg',
+    issue_timestamp: '2025-11-10T09:45:00Z',
+    assignee_name: 'Michael Brown',
+    assignee_picture: 'https://randomuser.me/api/portraits/men/32.jpg',
+    assignment_timestamp: '2025-11-10T10:30:00Z',
+    status: 'In Progress'
+  },
+  {
+    id: '2',
+    type: 'Cleaning',
+    title: 'Post-Checkout Cleaning',
+    description: 'Deep cleaning required after tenant move-out.',
+    property: 'Emerald Heights',
+    room: 'Whole unit',
+    issued_by: 'Sophia Green',
+    issuer_picture: 'https://randomuser.me/api/portraits/women/15.jpg',
+    issue_timestamp: '2025-11-09T14:10:00Z',
+    assignee_name: 'Emma Davis',
+    assignee_picture: 'https://randomuser.me/api/portraits/women/25.jpg',
+    assignment_timestamp: '2025-11-09T15:00:00Z',
+    status: 'Open'
+  },
+  {
+    id: '3',
+    type: 'Property Turnover',
+    title: 'Unit Handover Preparation',
+    description: 'Inspect and prepare the unit for new tenants.',
+    property: 'Maple Residency',
+    room: 'Whole unit',
+    issued_by: 'Daniel Scott',
+    issuer_picture: 'https://randomuser.me/api/portraits/men/45.jpg',
+    issue_timestamp: '2025-11-08T12:00:00Z',
+    assignee_name: 'Liam Wilson',
+    assignee_picture: 'https://randomuser.me/api/portraits/men/28.jpg',
+    assignment_timestamp: '2025-11-08T13:00:00Z',
+    status: 'Resolved'
+  },
+  {
+    id: '4',
+    type: 'Maintenance',
+    title: 'Plumbing Leak Fix',
+    description: 'Leak detected under kitchen sink.',
+    property: 'Palm Grove Apartments',
+    room: 'Room 103',
+    issued_by: 'Olivia Johnson',
+    issuer_picture: 'https://randomuser.me/api/portraits/women/18.jpg',
+    issue_timestamp: '2025-11-11T08:20:00Z',
+    assignee_name: 'Noah Clark',
+    assignee_picture: 'https://randomuser.me/api/portraits/men/51.jpg',
+    assignment_timestamp: '2025-11-11T09:00:00Z',
+    status: 'In Progress'
+  },
+  {
+    id: '5',
+    type: 'Others',
+    title: 'Key Replacement Request',
+    description: 'Lost keys for Room 507, replacement needed.',
+    property: 'Cedar Park Residences',
+    room: 'Room 507',
+    issued_by: 'Henry Adams',
+    issuer_picture: 'https://randomuser.me/api/portraits/men/62.jpg',
+    issue_timestamp: '2025-11-06T10:15:00Z',
+    assignee_name: 'Lucas King',
+    assignee_picture: 'https://randomuser.me/api/portraits/men/30.jpg',
+    assignment_timestamp: '2025-11-06T11:00:00Z',
+    status: 'Pending Review'
+  },
+  {
+    id: '6',
+    type: 'Cleaning',
+    title: 'Lobby Deep Cleaning',
+    description: 'Full deep clean of the lobby and reception area.',
+    property: 'Vista Towers',
+    room: 'Whole unit',
+    issued_by: 'Charlotte White',
+    issuer_picture: 'https://randomuser.me/api/portraits/women/26.jpg',
+    issue_timestamp: '2025-11-05T07:30:00Z',
+    assignee_name: 'Grace Hill',
+    assignee_picture: 'https://randomuser.me/api/portraits/women/33.jpg',
+    assignment_timestamp: '2025-11-05T08:00:00Z',
+    status: 'Resolved'
+  },
+  {
+    id: '7',
+    type: 'Property Turnover',
+    title: 'Final Inspection for Unit 9B',
+    description: 'Ensure all fixtures are functional before handover.',
+    property: 'Orchid Residences',
+    room: 'Whole unit',
+    issued_by: 'William Harris',
+    issuer_picture: 'https://randomuser.me/api/portraits/men/48.jpg',
+    issue_timestamp: '2025-11-07T13:25:00Z',
+    assignee_name: 'Benjamin Lee',
+    assignee_picture: 'https://randomuser.me/api/portraits/men/37.jpg',
+    assignment_timestamp: '2025-11-07T14:10:00Z',
+    status: 'Closed'
+  },
+  {
+    id: '8',
+    type: 'Maintenance',
+    title: 'Lighting Replacement in Hallway',
+    description: 'Replace two flickering lights in the corridor.',
+    property: 'Lakeside Apartments',
+    room: 'Whole unit',
+    issued_by: 'Amelia Brown',
+    issuer_picture: 'https://randomuser.me/api/portraits/women/40.jpg',
+    issue_timestamp: '2025-11-04T16:00:00Z',
+    assignee_name: 'Ethan Walker',
+    assignee_picture: 'https://randomuser.me/api/portraits/men/55.jpg',
+    assignment_timestamp: '2025-11-04T16:45:00Z',
+    status: 'Open'
+  }
+]
+
+export const noticesData: Notice[] = [
+  {
+    id: '1',
+    title: 'Maintenance Scheduled',
+    description:
+      'Water supply will be shut down from 9 AM to 1 PM due to maintenance work.',
+    type: 'Maintenance',
+    created_at: '2025-11-10T08:00:00Z',
+    effective_date: '2025-11-12T09:00:00Z',
+    posted_by: 'John Doe',
+    audience: 'Specific Recipients'
+  },
+  {
+    id: '2',
+    title: 'Fire Drill',
+    description:
+      'A fire drill is scheduled for all tenants next Monday at 3 PM.',
+    type: 'Safety',
+    created_at: '2025-11-08T10:30:00Z',
+    effective_date: '2025-11-15T15:00:00Z',
+    posted_by: 'Lisa Smith',
+    audience: 'All Staff & Tenants'
+  },
+  {
+    id: '3',
+    title: 'Rent Reminder',
+    description:
+      'Tenants with overdue payments are requested to settle before the 15th.',
+    type: 'Finance',
+    created_at: '2025-11-09T09:15:00Z',
+    effective_date: '2025-11-13T00:00:00Z',
+    posted_by: 'Michael Brown',
+    audience: 'Tenants With Overdue Payment'
+  },
+  {
+    id: '4',
+    title: 'Staff Meeting',
+    description: 'Monthly staff meeting in the conference room at 10 AM.',
+    type: 'Meeting',
+    created_at: '2025-11-07T14:00:00Z',
+    effective_date: '2025-11-14T10:00:00Z',
+    posted_by: 'Sarah Johnson',
+    audience: 'All Staff'
+  },
+  {
+    id: '5',
+    title: 'Tenant BBQ Event',
+    description:
+      'We are hosting a BBQ for tenants this weekend at the community area.',
+    type: 'Event',
+    created_at: '2025-11-06T12:00:00Z',
+    effective_date: '2025-11-16T17:00:00Z',
+    posted_by: 'Emily Davis',
+    audience: 'All Tenants'
+  },
+  {
+    id: '6',
+    title: 'Elevator Maintenance',
+    description:
+      'The elevator will be out of service on the 20th from 8 AM to 6 PM. ',
+    type: 'Maintenance',
+    created_at: '2025-11-05T11:30:00Z',
+    effective_date: '2025-11-20T08:00:00Z',
+    posted_by: 'Robert Wilson',
+    audience: 'All Staff & Tenants'
+  }
+]
+
+// Other data
+export const malaysiaStates: string[] = [
+  'Johor',
+  'Kedah',
+  'Kelantan',
+  'Melaka',
+  'Negeri Sembilan',
+  'Pahang',
+  'Perak',
+  'Perlis',
+  'Penang',
+  'Sabah',
+  'Sarawak',
+  'Selangor',
+  'Terengganu',
+  'Kuala Lumpur',
+  'Labuan',
+  'Putrajaya'
+]
+
+export const taskTypes: string[] = ['Maintenance', 'Cleaning', 'Others']

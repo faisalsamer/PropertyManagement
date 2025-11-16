@@ -32,7 +32,7 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import Tooltip from '../costume-ui/Tooltip'
+import Tooltip from '../costume-ui/tooltip'
 import { Payment } from '@/types'
 import { paymentsData } from '@/utils/data'
 import { cn } from '@/lib/utils'
@@ -41,7 +41,7 @@ import { Repeat } from 'lucide-react'
 import { formatCurrency } from '@/utils/formatCurrency'
 import { Progress } from '../ui/progress'
 import Image from 'next/image'
-import { UserAvatar } from '@/components/costume-ui/NameAvatar'
+import { UserAvatar } from '@/components/costume-ui/name-avatar'
 
 export const columns: ColumnDef<Payment>[] = [
   //Checkbox
@@ -77,7 +77,9 @@ export const columns: ColumnDef<Payment>[] = [
       return (
         <div>
           <div className='text-left texts-table-cell-primary'>{'#' + id}</div>
-          <div className='text-left'>{type}</div>
+          <div className='text-left texts-table-cell-secondary text-(--text-secondary)'>
+            {type}
+          </div>
         </div>
       )
     }
@@ -156,9 +158,7 @@ export const columns: ColumnDef<Payment>[] = [
             <div
               data-status={statusKey}
               className={cn(
-                'flex items-center justify-center',
-                'w-fit p-[5] px-2.5',
-                'rounded-md select-none',
+                'status-styles',
                 'data-[status=paid]:bg-green-100 data-[status=paid]:text-green-800',
                 'data-[status=paid-late]:bg-yellow-100 data-[status=paid-late]:text-yellow-800',
                 'data-[status=pending]:bg-gray-100 data-[status=pending]:text-gray-800',
@@ -250,7 +250,7 @@ export const columns: ColumnDef<Payment>[] = [
   }
 ]
 
-export default function PropertiesTable () {
+export default function PaymentsTable () {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

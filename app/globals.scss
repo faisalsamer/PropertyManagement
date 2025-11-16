@@ -1,3 +1,6 @@
+@import 'tailwindcss';
+
+@plugin "@tailwindcss/container-queries";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 body {
@@ -66,7 +69,7 @@ code {
   --text-primary: #1f1f1f;
   --text-secondary: #6b7280;
   --text-muted: #a0a0a0;
-  --text-placeholder: #9ca3af;
+  --text-placeholder: #8d9197;
   --text-inverse: #ffff;
 
   --border-default: #e5e7eb;
@@ -188,7 +191,7 @@ h2 {
 }
 
 h3 {
-  @include text-style($weight: medium, $size: 20px, $tracking: -1%);
+  @include text-style($weight: 500, $size: 20px, $tracking: -1%);
 }
 
 .texts-heading-h1 {
@@ -200,11 +203,11 @@ h3 {
 }
 
 .texts-heading-h3 {
-  @include text-style($weight: medium, $size: 20px, $tracking: -1%);
+  @include text-style($weight: 500, $size: 20px, $tracking: -1%);
 }
 
 .texts-body-large {
-  @include text-style($weight: normal, $size: 16px);
+  @include text-style($weight: 400, $size: 16px);
 }
 
 .texts-body-large-medium {
@@ -212,7 +215,7 @@ h3 {
 }
 
 .texts-body-medium {
-  @include text-style($weight: normal, $size: 14px);
+  @include text-style($weight: 400, $size: 14px);
 }
 
 .texts-body-medium-medium {
@@ -220,7 +223,7 @@ h3 {
 }
 
 .texts-body-small {
-  @include text-style($weight: normal, $size: 13px);
+  @include text-style($weight: 400, $size: 13px);
 }
 
 .texts-body-small-medium {
@@ -228,19 +231,19 @@ h3 {
 }
 
 .texts-button-primary {
-  @include text-style($weight: medium, $size: 14px);
+  @include text-style($weight: 500, $size: 14px);
 }
 
 .texts-button-secondary {
-  @include text-style($weight: medium, $size: 13px, $leading: 0%);
+  @include text-style($weight: 500, $size: 13px, $leading: 0%);
 }
 
 .texts-label-large {
-  @include text-style($weight: medium, $size: 14px);
+  @include text-style($weight: 500, $size: 14px);
 }
 
 .texts-label-medium {
-  @include text-style($weight: medium, $size: 13px);
+  @include text-style($weight: 500, $size: 13px);
 }
 
 .texts-label-small {
@@ -281,19 +284,12 @@ h3 {
 
 // Shadow effects
 .shadows-xs {
-  box-shadow:
-    0px 1px 2px rgba(0, 0, 0, 0.05),
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .shadows-sm {
-  box-shadow:
-    0px 1px 2px rgba(0, 0, 0, 0.06),
-    0px 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.06), 0px 1px 3px rgba(0, 0, 0, 0.1);
 }
-
-
-
-
 
 /* For WebKit browsers (Chrome, Safari, Edge) */
 .hide-scrollbar::-webkit-scrollbar {
@@ -307,3 +303,17 @@ h3 {
   -ms-overflow-style: none; /* older IE/Edge */
 }
 
+// Elements styles
+.status-styles {
+  @extend .texts-table-cell-secondary;
+  @apply flex items-center justify-center;
+  @apply w-fit p-[4] px-2;
+  @apply rounded-md select-none;
+}
+
+
+// Animations
+.transition-collapse-section-helper {
+  transition-property: padding;
+  transition-delay: 200ms;
+}

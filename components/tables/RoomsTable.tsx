@@ -32,7 +32,7 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import Tooltip from '../costume-ui/Tooltip'
+import Tooltip from '../costume-ui/tooltip'
 import { Room } from '@/types'
 import { roomsData } from '@/utils/data'
 import { cn } from '@/lib/utils'
@@ -90,9 +90,7 @@ export const columns: ColumnDef<Room>[] = [
           <div
             data-status={statusKey}
             className={cn(
-              'flex items-center justify-center',
-              'w-fit p-[5] px-2.5',
-              'rounded-md select-none',
+              'status-styles',
               'data-[status=occupied]:bg-green-100 data-[status=occupied]:text-green-800',
               'data-[status=under-preparation]:bg-yellow-100 data-[status=under-preparation]:text-yellow-800',
               'data-[status=pending-inspection]:bg-orange-100 data-[status=pending-inspection]:text-orange-800',
@@ -139,7 +137,7 @@ export const columns: ColumnDef<Room>[] = [
   }
 ]
 
-export default function PropertiesTable () {
+export default function RoomsTable () {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

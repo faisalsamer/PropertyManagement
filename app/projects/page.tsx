@@ -1,16 +1,17 @@
 import { cn } from '@/lib/utils'
 import React from 'react'
-import SearchInput from '@/components/costume-ui/SearchInput'
-import Button from '@/components/costume-ui/Button'
+import SearchInput from '@/components/costume-ui/search-input'
+import Button from '@/components/costume-ui/button'
 import {
   AddButtonIcon,
   DeleteButtonIcon,
   ImportButtonIcon
-} from '@/components/costume-ui/Icons'
-
+} from '@/components/costume-ui/icon'
 import ProjectsTable from '@/components/tables/ProjectsTable'
+import Dialog from '@/components/costume-ui/dialog'
+import AddProject from '@/components/add-project'
 
-const page = () => {
+const Projects = () => {
   return (
     <div className={cn('flex flex-col gap-2.5', 'h-full')}>
       {/* Heading */}
@@ -34,10 +35,19 @@ const page = () => {
             className='bg-(--error-main)!'
           />
 
-          <Button
-            icon={<AddButtonIcon className='text-neutral-300' />}
-            label='Add Project'
-          />
+          <Dialog
+            openDialogButton={
+              <Button
+                icon={<AddButtonIcon className='text-neutral-300' />}
+                label='Add Project'
+                type='button'
+              />
+            }
+            title='Add Project'
+            saveButtonLabel='Save'
+          >
+            <AddProject />
+          </Dialog>
         </div>
       </div>
       {/* Table */}
@@ -48,4 +58,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Projects

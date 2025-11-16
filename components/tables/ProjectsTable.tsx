@@ -34,7 +34,7 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import Tooltip from '../costume-ui/Tooltip'
+import Tooltip from '../costume-ui/tooltip'
 import { Project } from '@/types'
 import { projectsData } from '@/utils/data'
 

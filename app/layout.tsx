@@ -1,20 +1,9 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import './tailwindimport.css'
 import './globals.scss'
+
 import { SidebarProvider } from '@/components/ui/sidebar'
 import Sidebar from '@/components/app-sidebar'
 import { cn } from '@/lib/utils'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin']
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin']
-})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -30,20 +19,20 @@ export default function RootLayout ({
     <html lang='en'>
       <body
         className={cn(
-          'bg-(--background-secondary)!'
+          'bg-(--background-secondary)! '
         )}
       >
         <SidebarProvider className='px-[15]'>
           <main
             className={cn(
               'flex gap-2.5',
-              'h-screen w-full py-[15]'
+              'h-screen w-full py-[15] '
             )}
           >
             <Sidebar />
-            <div className={cn('h-fit min-h-100 max-h-300 w-full p-7.5',
+            <div className={cn('w-full p-7.5',
               'bg-(--background-primary) border border-(--border-default)',
-              'rounded-[15]'
+              'rounded-[15] overflow-auto'
             )}>
               {children}
               </div>

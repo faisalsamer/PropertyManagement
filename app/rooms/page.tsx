@@ -1,14 +1,11 @@
 import { cn } from '@/lib/utils'
-import SearchInput from '@/components/costume-ui/SearchInput'
-import Button from '@/components/costume-ui/Button'
-import {
-  AddButtonIcon,
-  DeleteButtonIcon
-} from '@/components/costume-ui/Icons'
+import SearchInput from '@/components/costume-ui/search-input'
+import Button from '@/components/costume-ui/button'
+import { AddButtonIcon, DeleteButtonIcon } from '@/components/costume-ui/icon'
 import RoomsTable from '@/components/tables/RoomsTable'
+import Link from 'next/link'
 
-
-const Properties = () => {
+const Rooms = () => {
   return (
     <div className={cn('flex flex-col gap-2.5', 'h-full')}>
       {/* Heading */}
@@ -26,10 +23,12 @@ const Properties = () => {
             className='bg-(--error-main)!'
           />
 
-          <Button
-            icon={<AddButtonIcon className='text-neutral-300' />}
-            label='Add Room'
-          />
+          <Link href='/rooms/add-room'>
+            <Button
+              icon={<AddButtonIcon className='text-neutral-300' />}
+              label='Add Room'
+            />
+          </Link>
         </div>
       </div>
       {/* Table */}
@@ -40,4 +39,4 @@ const Properties = () => {
   )
 }
 
-export default Properties
+export default Rooms

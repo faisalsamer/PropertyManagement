@@ -1,14 +1,14 @@
 import { cn } from '@/lib/utils'
-import SearchInput from '@/components/costume-ui/SearchInput'
-import Button from '@/components/costume-ui/Button'
+import SearchInput from '@/components/costume-ui/search-input'
+import Button from '@/components/costume-ui/button'
 import {
   AddButtonIcon,
   DeleteButtonIcon
-} from '@/components/costume-ui/Icons'
+} from '@/components/costume-ui/icon'
 import PaymentsTable from '@/components/tables/PaymentsTable'
 
 
-const Properties = () => {
+const Payments = () => {
   return (
     <div className={cn('flex flex-col gap-2.5', 'h-full')}>
       {/* Heading */}
@@ -28,7 +28,7 @@ const Properties = () => {
 
           <Button
             icon={<AddButtonIcon className='text-neutral-300' />}
-            label='Add Room'
+            label='Add Payment'
           />
         </div>
       </div>
@@ -40,4 +40,4 @@ const Properties = () => {
   )
 }
 
-export default Properties
+export default Payments

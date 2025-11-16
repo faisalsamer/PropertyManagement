@@ -1,0 +1,46 @@
+import { cn } from '@/lib/utils'
+import React from 'react'
+import { Option as OptionProps } from '@/types'
+
+type Props = OptionProps & React.ComponentProps<'button'>
+
+const Option = ({ Icon, label, isSelected, ...props }: Props) => {
+  return (
+    <button
+      className={cn(
+        'group flex items-center gap-2.5',
+        'w-full h-20 px-2.5 border',
+        isSelected
+          ? 'bg-(--secondary-color)/4 border-(--secondary-color)'
+          : 'border-(--border-strong) hover:bg-neutral-50 hover:border-neutral-400 cursor-pointer',
+        'transition-colors duration-200',
+        'rounded-lg'
+      )}
+      {...props}
+    >
+      <div
+        className={cn(
+          'grid justify-center items-center',
+          'h-10 w-10',
+          isSelected
+            ? 'bg-(--secondary-color)/10 text-(--secondary-color)'
+            : 'bg-neutral-100 text-neutral-500 group-hover:bg-neutral-200',
+          'transition-colors duration-200',
+          'rounded-md'
+        )}
+      >
+        <Icon size={17} />
+      </div>
+      <span
+        className={cn(
+          'texts-body-medium-medium',
+          isSelected && 'text-(--secondary-color)'
+        )}
+      >
+        {label}
+      </span>
+    </button>
+  )
+}
+
+export default Option

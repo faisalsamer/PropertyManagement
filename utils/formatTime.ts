@@ -24,3 +24,17 @@ export function formatTimestamp(timestamp: string): string {
     return `${day}/${month}/${year}`
   }
 }
+
+// Timestamp -> Oct 15, 2025, 03:10 PM
+export function formatTimestampLong(iso: string): string {
+  const date = new Date(iso);
+
+  return date.toLocaleString('en-US', {
+    month: 'short',       // "Oct"
+    day: '2-digit',       // "15"
+    year: 'numeric',      // "2025"
+    hour: '2-digit',      // "03"
+    minute: '2-digit',    // "10"
+    hour12: true,         // AM/PM
+  });
+}

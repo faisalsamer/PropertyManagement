@@ -10,7 +10,6 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarTrigger,
-  SidebarMenuSubButton,
   SidebarGroupLabel,
   useSidebar
 } from '@/components/ui/sidebar'
@@ -21,7 +20,7 @@ import {
   CollapsibleTrigger
 } from '@/components/ui/collapsible'
 import { cn } from '@/lib/utils'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   GaugeIcon,
   ProjectIcon,
@@ -34,7 +33,7 @@ import {
   ReportsIcon,
   SupportIcon,
   SettingsIcon
-} from './costume-ui/Icons'
+} from './costume-ui/icon'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -42,7 +41,7 @@ import { usePathname } from 'next/navigation'
 export default function AppSidebar () {
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({})
   const [sidebarHovered, setSidebarHovered] = useState<boolean>(false)
-  const { open: isSidebarOpen } = useSidebar()
+  const { open: isSidebarOpen, setOpen: setIsSidebarOpen } = useSidebar()
   const pathname = usePathname()
 
   type menuItemContentType = {
@@ -81,12 +80,20 @@ export default function AppSidebar () {
       icon: TransactionsIcon,
       label: 'Transactions',
       width: 'w-5!',
-      subMenu: [{ label: 'Payments', href: '/payments' }, { label: 'Expenses' }]
+      subMenu: [
+        { label: 'Payments', href: '/payments' },
+        { label: 'Expenses', href: '/expenses' }
+      ]
     },
     {
       icon: PoepleIcon,
       label: 'People',
-      width: 'w-5.5!'
+      width: 'w-6!',
+      subMenu: [
+        { label: 'Tenants', href: '/tenants' },
+        { label: 'Owners', href: '/owners' },
+        { label: 'Staff', href: '/staff' }
+      ]
     },
     {
       icon: ScreeningIcon,
@@ -96,16 +103,21 @@ export default function AppSidebar () {
     {
       icon: ClipboardIcon,
       label: 'Work Operations',
-      width: 'w-5!'
+      width: 'w-5!',
+      subMenu: [
+        { label: 'Tickets', href: '/tickets' },
+        { label: 'Tasks', href: '/tasks' }
+      ]
     },
     {
       icon: NoticesIcon,
       label: 'Notices',
-      width: 'w-5!'
+      width: 'w-5!',
+      href: '/notices'
     },
     {
       icon: ReportsIcon,
-      label: 'Staff',
+      label: 'Reports',
       width: 'w-5!'
     }
   ]
@@ -126,6 +138,8 @@ export default function AppSidebar () {
   useEffect(() => {
     if (isSidebarOpen) {
       setSidebarHovered(false)
+    } else {
+      setOpenMenus({})
     }
   }, [isSidebarOpen])
 
@@ -219,9 +233,12 @@ export default function AppSidebar () {
                     <Collapsible
                       key={`collapsible-${index}-${item.label}`}
                       open={!!openMenus[item.label]}
-                      onOpenChange={open =>
+                      onOpenChange={open => {
                         setOpenMenus(prev => ({ ...prev, [item.label]: open }))
-                      }
+                        if (!isSidebarOpen) {
+                          setIsSidebarOpen(true)
+                        }
+                      }}
                     >
                       <CollapsibleTrigger asChild>
                         <SidebarMenuButton
@@ -240,11 +257,18 @@ export default function AppSidebar () {
                             'justify-between'
                           )}
                         >
-                          <span className='flex items-center gap-3'>
+                          <span className='flex items-center gap-2'>
                             <item.icon
                               className={cn(item.width, 'flex-shrink-0')}
                             />
-                            {item.label}
+                            <span
+                              className={`${
+                                !isSidebarOpen &&
+                                'transition-opacity delay-100 opacity-0'
+                              }`}
+                            >
+                              {item.label}
+                            </span>
                           </span>
                           <svg
                             className={cn(
@@ -264,7 +288,7 @@ export default function AppSidebar () {
                           </svg>
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className='mt-1 ml-4 space-y-1'>
+                      <CollapsibleContent className='mt-2 ml-4 space-y-1'>
                         {item.subMenu?.map((subItem, subIndex) => {
                           const isSubItemActive = pathname === subItem.href
                           return (
@@ -273,7 +297,7 @@ export default function AppSidebar () {
                               asChild
                             >
                               <Link
-                                href={subItem.href || '/'}
+                                href={subItem.href || '/under-development'}
                                 onClick={e => {
                                   e.stopPropagation() // Prevent bubbling to CollapsibleTrigger
                                 }}
@@ -310,8 +334,8 @@ export default function AppSidebar () {
                       className={cn(
                         `${
                           isActive
-                            ? 'border border-(--border-strong) bg-(--background-primary) shadows-sm duration-0'
-                            : 'hover:bg-neutral-200/50 active:bg-neutral-200/90 cursor-pointer duration-100'
+                            ? 'border border-(--border-strong) bg-(--background-primary) hover:bg-(--background-primary) shadows-sm duration-0 cursor-default'
+                            : 'hover:bg-neutral-200/50 active:bg-neutral-200/90 duration-100'
                         }`,
                         !isSidebarOpen && index === 0 && 'mt-1',
                         'text-neutral-600!',
@@ -327,7 +351,7 @@ export default function AppSidebar () {
                           'flex items-center gap-2!',
                           'w-[30px] h-[30px]'
                         )}
-                        href={item.href || '/'}
+                        href={item.href || '/under-development'}
                       >
                         <div
                           className={cn(

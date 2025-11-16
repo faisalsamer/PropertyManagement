@@ -1,75 +1,79 @@
 'use client'
-import { cn } from '@/lib/utils'
 
-type ButtonType = {
+import { cn } from '@/lib/utils'
+import { cva } from 'class-variance-authority'
+
+type Props = {
   variant?: 'primary' | 'secondary'
   className?: string
   labelStyles?: string
   icon?: React.ReactNode
   label?: string
-}
+  isResponsive?: boolean
+} & Omit<React.ComponentProps<'button'>, 'is'>
+
+const buttonStyles = cva(
+  [
+    'h-10 w-fit px-3',
+    'transition-colors transition-opacity duration-100 active:duration-0',
+    'flex items-center justify-center gap-1.5 lg:gap-2.5',
+    'rounded-md cursor-pointer'
+  ],
+  {
+    variants: {
+      variant: {
+        primary: cn('bg-(--primary-color)', 'shadows-sm', 'hover:opacity-90 active:opacity-80'),
+        secondary: cn(
+          'bg-(--background-primary)! border border-(--border-strong)!',
+          'shadows-xs',
+          'hover:bg-neutral-50! active:bg-neutral-100!'
+        )
+      }
+    },
+    defaultVariants: {
+      variant: 'primary'
+    }
+  }
+)
+
+const labelStylesCVA = cva('', {
+  variants: {
+    variant: {
+      primary: 'texts-button-primary text-(--text-inverse)',
+      secondary: 'texts-button-primary text-(--text-primary)'
+    }
+  }
+})
+
 const Button = ({
   className = '',
   labelStyles = '',
   icon,
   label,
-  variant
-}: ButtonType) => {
-  if (variant === 'secondary') {
-    return (
-      <button
-        className={cn(
-          'bg-(--background-primary)! border border-(--border-strong)!',
-          'h-10 px-3',
-          'flex items-center justify-center gap-1.5 lg:gap-2.5',
-          'shadows-xs rounded-lg',
-          'hover:bg-neutral-50! cursor-pointer',
-          className
-        )}
-      >
-        <div
-          className={cn('w-5 h-auto p-0.5', 'flex items-center justify-center')}
-        >
+  variant = 'primary',
+  isResponsive = true,
+  ...props
+}: Props) => {
+  return (
+    <button className={cn(buttonStyles({ variant }), className)} {...props}>
+      {icon && (
+        <div className='w-5 h-auto p-0.5 flex items-center justify-center'>
           {icon}
         </div>
-        <span
-          className={cn(
-            'texts-button-primary text-(--text-primary)',
-            labelStyles
-          )}
-        >
-          <span className='hidden lg:inline'>{label}</span>
-          <span className='inline lg:hidden'>{label?.split(' ')[0]}</span>
-        </span>
-      </button>
-    )
-  }
-
-  return (
-    <button
-      className={cn(
-        'bg-(--primary-color)',
-        'h-10 px-3',
-        'flex items-center justify-center gap-1.5 lg:gap-2.5',
-        'shadows-sm rounded-lg',
-        'hover:opacity-90 cursor-pointer',
-        className
       )}
-    >
-      <div
-        className={cn('w-5 h-auto p-0.5', 'flex items-center justify-center')}
-      >
-        {icon}
-      </div>
-      <span
-        className={cn(
-          'texts-button-primary text-(--text-inverse)',
-          labelStyles
-        )}
-      >
-        <span className='hidden lg:inline'>{label}</span>
-        <span className='inline lg:hidden'>{label?.split(' ')[0]}</span>
-      </span>
+
+      {label && (
+        <span className={cn(labelStylesCVA({ variant }), labelStyles)}>
+          {isResponsive ? (
+            <>
+              <span className='hidden lg:inline'>{label}</span>
+              <span className='inline lg:hidden'>{label.split(' ')[0]}</span>
+            </>
+          ) : (
+            <span>{label}</span>
+          )}
+        </span>
+      )}
     </button>
   )
 }
