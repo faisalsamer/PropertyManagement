@@ -43,7 +43,7 @@ export default function Dialog ({
             </DialogTitle>
             {sub_title && <DialogDescription>{sub_title}</DialogDescription>}
           </DialogHeader>
-          <div className='p-5  max-h-100 overflow-auto'>{children}</div>
+          <div className='transition-all duration-300 p-5  max-h-120 overflow-auto'>{children}</div>
           {(saveButtonLabel || cancelButtonLabel) && (
             <DialogFooter>
               <div className='w-full flex items-center justify-end border-t border-(--border-strong) p-7 py-5'>

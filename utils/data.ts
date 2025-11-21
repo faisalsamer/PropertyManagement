@@ -1,5 +1,6 @@
 import type {
   Expense,
+  ChargeTypeType,
   Notice,
   Owner,
   Payment,
@@ -9,7 +10,8 @@ import type {
   Staff,
   Task,
   Tenant,
-  Ticket
+  Ticket,
+  PaymentType
 } from '@/types'
 
 export const projectsData: Project[] = [
@@ -529,7 +531,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't1',
     tenant_name: 'John Doe',
-    tenant_picture: '/avatar/john.png',
     identity_no: 'A12345678',
     phone_no: '+1234567890',
     email: 'john.doe@example.com',
@@ -539,7 +540,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't2',
     tenant_name: 'Jane Smith',
-    tenant_picture: '/avatar/jane.png',
     identity_no: 'B98765432',
     phone_no: '+1987654321',
     email: 'jane.smith@example.com',
@@ -549,7 +549,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't3',
     tenant_name: 'Michael Johnson',
-    tenant_picture: '/avatar/michael.png',
     identity_no: 'C56781234',
     phone_no: '+1123456789',
     email: 'michael.johnson@example.com',
@@ -559,7 +558,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't4',
     tenant_name: 'Emily Davis',
-    tenant_picture: '/avatar/emily.png',
     identity_no: 'D87654321',
     phone_no: '+1098765432',
     email: 'emily.davis@example.com',
@@ -569,7 +567,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't5',
     tenant_name: 'William Brown',
-    tenant_picture: '/avatar/william.png',
     identity_no: 'E23456789',
     phone_no: '+1012345678',
     email: 'william.brown@example.com',
@@ -579,7 +576,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't6',
     tenant_name: 'Olivia Wilson',
-    tenant_picture: '/avatar/olivia.png',
     identity_no: 'F34567890',
     phone_no: '+1098765432',
     email: 'olivia.wilson@example.com',
@@ -589,7 +585,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't7',
     tenant_name: 'James Taylor',
-    tenant_picture: '/avatar/james.png',
     identity_no: 'G45678901',
     phone_no: '+1230984567',
     email: 'james.taylor@example.com',
@@ -599,7 +594,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't8',
     tenant_name: 'Sophia Martinez',
-    tenant_picture: '/avatar/sophia.png',
     identity_no: 'H56789012',
     phone_no: '+1987345612',
     email: 'sophia.martinez@example.com',
@@ -609,7 +603,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't9',
     tenant_name: 'Benjamin Anderson',
-    tenant_picture: '/avatar/benjamin.png',
     identity_no: 'I67890123',
     phone_no: '+1203948576',
     email: 'benjamin.anderson@example.com',
@@ -619,7 +612,6 @@ export const tenantsData: Tenant[] = [
   {
     id: 't10',
     tenant_name: 'Mia Thomas',
-    tenant_picture: '/avatar/mia.png',
     identity_no: 'J78901234',
     phone_no: '+1092837465',
     email: 'mia.thomas@example.com',
@@ -632,7 +624,6 @@ export const ownersData: Owner[] = [
   {
     id: 'owner-1',
     owner_name: 'Alice Johnson',
-    owner_picture: '/avatars/owner1.png',
     phone_no: '+1 555-123-4567',
     email: 'alice.johnson@example.com',
     property_count: 5
@@ -640,7 +631,6 @@ export const ownersData: Owner[] = [
   {
     id: 'owner-2',
     owner_name: 'Bob Smith',
-    owner_picture: '/avatars/owner2.png',
     phone_no: '+1 555-987-6543',
     email: 'bob.smith@example.com',
     property_count: 2
@@ -648,7 +638,6 @@ export const ownersData: Owner[] = [
   {
     id: 'owner-3',
     owner_name: 'Carol Lee',
-    owner_picture: '/avatars/owner3.png',
     phone_no: '+1 555-234-5678',
     email: 'carol.lee@example.com',
     property_count: 3
@@ -656,7 +645,6 @@ export const ownersData: Owner[] = [
   {
     id: 'owner-4',
     owner_name: 'David Martinez',
-    owner_picture: '/avatars/owner4.png',
     phone_no: '+1 555-345-6789',
     email: 'david.martinez@example.com',
     property_count: 4
@@ -664,7 +652,6 @@ export const ownersData: Owner[] = [
   {
     id: 'owner-5',
     owner_name: 'Eva Brown',
-    owner_picture: '/avatars/owner5.png',
     phone_no: '+1 555-456-7890',
     email: 'eva.brown@example.com',
     property_count: 1
@@ -672,7 +659,6 @@ export const ownersData: Owner[] = [
   {
     id: 'owner-6',
     owner_name: 'Frank Wilson',
-    owner_picture: '/avatars/owner6.png',
     phone_no: '+1 555-567-8901',
     email: 'frank.wilson@example.com',
     property_count: 6
@@ -1103,3 +1089,58 @@ export const malaysiaStates: string[] = [
 ]
 
 export const taskTypes: string[] = ['Maintenance', 'Cleaning', 'Others']
+
+export const noticeTypes: string[] = [
+  'General Announcement',
+  'Maintenance',
+  'Payment Reminder',
+  'Policy Update',
+  'Emergency Alert',
+  'Event'
+]
+
+export const paymentTypes: PaymentType[] = [
+  { type: 'Lease Initial Charges' },
+  { type: 'Fines or Penalties' },
+  { type: 'Utilities', isRecurrable: true },
+  { type: 'Cleaning Service', isRecurrable: true },
+  { type: 'Parking', isRecurrable: true },
+  { type: 'Miscellaneous/Other', isRecurrable: true }
+]
+
+export const chargeTypes: ChargeTypeType[] = [
+  { type: 'First Month Rental', taxable: true, refundable: false },
+  { type: 'Earnest Deposit', taxable: false, refundable: true },
+  { type: 'Security Deposit', taxable: false, refundable: true },
+  { type: 'Utility Deposit', taxable: false, refundable: true },
+  { type: 'Legal Fees', taxable: false, refundable: false }
+]
+
+export const propertyExpenseTypes: PaymentType[] = [
+  { type: 'Cleaning Services', isRecurrable: true },
+  { type: 'Utilities', isRecurrable: true },
+  { type: 'Agent Fees', isRecurrable: true },
+  { type: 'Maintenance & Repair', isRecurrable: true },
+  { type: 'Parking', isRecurrable: true },
+  { type: 'Furniture & Appliances', isRecurrable: true },
+  { type: 'Miscellaneous/Other', isRecurrable: true }
+]
+
+export const contractExpenseTypes: PaymentType[] = [
+  { type: 'Contract Initial Charges' },
+  { type: 'Fines or Penalties' },
+  { type: 'Miscellaneous/Other', isRecurrable: true }
+]
+
+export const companyExpenseTypes: PaymentType[] = [
+  { type: 'Office Rent', isRecurrable: true },
+  { type: 'Utilities', isRecurrable: true },
+  { type: 'Legal & Professional Fees', isRecurrable: true },
+  { type: 'Marketing & Advertising', isRecurrable: true },
+  { type: 'Travel & Transportation', isRecurrable: true },
+  { type: 'Office Supplies', isRecurrable: true },
+  { type: 'Equipment & Furniture', isRecurrable: true },
+  { type: 'Taxes & Licenses', isRecurrable: true },
+  { type: 'Fines or Penalties' },
+  { type: 'Miscellaneous/Other', isRecurrable: true }
+]

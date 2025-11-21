@@ -46,7 +46,13 @@ const AddTask = () => {
         />
       </InputGroup>
       <InputCard isRemoveable={false} className='h-auto!' asChild>
-        <div className='flex flex-col gap-3'>
+        <div
+          className={cn(
+            'flex flex-col',
+            'transition-all duration-300',
+            showRoomSelect ? 'gap-3' : 'gap-0'
+          )}
+        >
           <InputGroup label='This property has rooms'>
             <RadioGroup
               defaultOption={0}
@@ -67,30 +73,31 @@ const AddTask = () => {
               showRoomSelect ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
             )}
           >
+            {/* If showRoomSelect is false, then clear room select */}
             <InputGroup label='Room'>
               <Select
                 label='Rooms'
                 items={Rooms}
                 placeholder='Select a room'
                 className='bg-(--background-primary)'
-                required
+                required={showRoomSelect}
               />
             </InputGroup>
           </div>
         </div>
       </InputCard>
       <div className={styles.inputsContainer}>
-        <InputGroup label='title' isRequired>
+        <InputGroup label='Title' isRequired>
           <Input
             placeholder='E.g. Check Kitchen Sink Leaking'
             maxLength={50}
             required
           />
         </InputGroup>
-        <InputGroup label='Type'>
+        <InputGroup label='Type' isRequired>
           <Select
             label='Types'
-            items={Rooms}
+            items={taskTypes}
             placeholder='Select type'
             required
           />
@@ -99,11 +106,15 @@ const AddTask = () => {
       <InputGroup label='Description' isRequired>
         <TextArea placeholder='Type description here' />
       </InputGroup>
-      <Combobox
-        items={staffItems}
-        variant='multiple'
-        placeholder='Assign staff'
-      />
+      <InputGroup label='Staff' isRequired>
+        <Combobox
+          items={staffItems}
+          searchPlaceholder='Search staff'
+          variant='multiple'
+          placeholder='Assign staff'
+          showAvatar
+        />
+      </InputGroup>
     </div>
   )
 }

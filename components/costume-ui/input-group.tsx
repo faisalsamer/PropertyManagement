@@ -14,10 +14,10 @@ const InputGroup = ({
   isRequired = false
 }: Props) => {
   return (
-    <div className={cn('grid gap-2 w-full', className)}>
+    <div className={cn('grid gap-2 w-full overflow-hidden', 'transition-all duration-300', className)}>
       {label && (
         <div className='texts-label-large'>
-          <span>{label}</span>
+          <span className='transition-all duration-300'>{label}</span>
           {isRequired && <span className='ml-1 text-(--error-dark)'>*</span>}
         </div>
       )}

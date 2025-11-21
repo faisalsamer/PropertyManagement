@@ -6,8 +6,11 @@ export type SingleSelectItem = {
   Icon?: React.ComponentType<any>
 }
 
-export function useSingleSelectOption (items: SingleSelectItem[]) {
+export function useSingleSelectOption(items: SingleSelectItem[]) {
   const [options, setOptions] = useState<SingleSelectItem[]>(items)
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(
+    items.findIndex(i => i.isSelected) ?? null
+  )
 
   const selectByIndex = (index: number) => {
     setOptions(prev =>
@@ -16,7 +19,8 @@ export function useSingleSelectOption (items: SingleSelectItem[]) {
         isSelected: i === index
       }))
     )
+    setSelectedIndex(index)
   }
 
-  return { options, selectByIndex }
+  return { options, selectByIndex, selectedIndex }
 }

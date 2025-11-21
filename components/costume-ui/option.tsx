@@ -1,8 +1,10 @@
 import { cn } from '@/lib/utils'
 import React from 'react'
-import { Option as OptionProps } from '@/types'
 
-type Props = OptionProps & React.ComponentProps<'button'>
+type Props = { Icon: any 
+  label: string
+  isSelected: boolean
+} & React.ComponentProps<'button'>
 
 const Option = ({ Icon, label, isSelected, ...props }: Props) => {
   return (

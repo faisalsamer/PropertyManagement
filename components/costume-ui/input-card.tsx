@@ -4,6 +4,7 @@ import { Trash2 } from 'lucide-react'
 type Props = {
   children: React.ReactNode
   isRemoveable?: boolean
+  onRemove?: () => void
   asChild?: boolean
   className?: string
 }
@@ -11,6 +12,7 @@ type Props = {
 const InputCard = ({
   children,
   isRemoveable = true,
+  onRemove,
   asChild = false,
   className = ''
 }: Props) => {
@@ -31,6 +33,7 @@ const InputCard = ({
       )}
       {isRemoveable && (
         <button
+          onClick={onRemove}
           className={cn(
             'absolute right-3 top-4',
             'text-(--error-main) hover:text-(--error-dark)',

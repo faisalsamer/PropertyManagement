@@ -5,6 +5,8 @@ import { AddButtonIcon, DeleteButtonIcon } from '@/components/costume-ui/icon'
 import Notice_Card from '@/components/notice-card'
 import { noticesData } from '@/utils/data'
 import React from 'react'
+import Dialog from '@/components/costume-ui/dialog'
+import AddNotice from '@/components/add-notice'
 
 const Notices = () => {
   return (
@@ -17,10 +19,19 @@ const Notices = () => {
       <div className={cn('flex justify-between items-center', 'w-full py-5')}>
         <SearchInput placeholder='Search notices' />
 
-        <Button
-          icon={<AddButtonIcon className='text-neutral-300' />}
-          label='Add Notice'
-        />
+        <Dialog
+          openDialogButton={
+            <Button
+              icon={<AddButtonIcon className='text-neutral-300' />}
+              label='Add Notice'
+            />
+          }
+          title='Add Notice'
+          saveButtonLabel='Save'
+          className='max-w-200!'
+        >
+          <AddNotice />
+        </Dialog>
       </div>
       <div className='@container'>
         <div

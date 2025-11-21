@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import { useState } from 'react'
 
 type Props = {
@@ -18,11 +19,14 @@ const RadioGroup = ({ defaultOption, options, onChange }: Props) => {
             setSelected(index)
             onChange?.(index)
           }}
-          className={`flex items-center gap-2 px-5 h-10 w-fit rounded-[5px] border transition-all duration-100 ${
-            selected === index
-              ? 'border-(--secondary-color) bg-(--secondary-color)/10'
-              : 'border-neutral-400'
-          }`}
+          className={cn(
+            `flex items-center gap-2 px-5 h-10 w-fit rounded-[5px] border transition-all duration-100 ${
+              selected === index
+                ? 'border-(--secondary-color) bg-(--secondary-color)/10'
+                : 'border-neutral-400 hover:bg-neutral-50 cursor-pointer'
+            }`,
+            'transition-colors duration-200',
+          )}
         >
           <div
             className={`w-4 h-4 rounded-full border transition-all duration-100 ${
@@ -31,7 +35,7 @@ const RadioGroup = ({ defaultOption, options, onChange }: Props) => {
                 : 'border-neutral-400'
             }`}
           />
-          <span className='texts-body-small'>{option}</span>
+          <span className='texts-body-small leading-0!'>{option}</span>
         </button>
       ))}
     </div>

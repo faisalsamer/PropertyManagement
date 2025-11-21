@@ -16,16 +16,18 @@ type Props = {
   items: string[]
   placeholder: string
   className?: string
+  onChange?: (value: string) => void
 } & React.ComponentProps<typeof ShadcnSelect>
 export default function Select ({
   label,
   items,
   placeholder,
   className,
+  onChange,
   ...props
 }: Props) {
   return (
-    <ShadcnSelect {...props}>
+    <ShadcnSelect onValueChange={onChange} {...props}>
       <SelectTrigger
         className={cn(
           'w-full h-10!',

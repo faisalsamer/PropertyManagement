@@ -16,9 +16,8 @@ import { MoreHorizontal } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
+import DropdownMenu from '../costume-ui/dropdown-menu'
 import {
-  DropdownMenu,
-  DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -36,6 +35,7 @@ import Tooltip from '../costume-ui/tooltip'
 import { Property } from '@/types'
 import { propertiesData } from '@/utils/data'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 export const columns: ColumnDef<Property>[] = [
   //Checkbox
@@ -143,24 +143,15 @@ export const columns: ColumnDef<Property>[] = [
       const property = row.original
 
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='ghost' className='h-8 w-8 p-0'>
-              <span className='sr-only'>Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(property.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
+        <DropdownMenu label='Actions'>
+          <Link href={`/properties/${property.id}`}>
+            <DropdownMenuItem>View Property</DropdownMenuItem>
+          </Link>
+          <DropdownMenuItem
+            onClick={() => navigator.clipboard.writeText(property.id)}
+          >
+            Edit Property
+          </DropdownMenuItem>
         </DropdownMenu>
       )
     }

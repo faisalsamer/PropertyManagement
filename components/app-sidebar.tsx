@@ -195,6 +195,7 @@ export default function AppSidebar () {
             )}
           />
         )}
+
         <div
           className={cn(
             'absolute left-0',
@@ -228,6 +229,7 @@ export default function AppSidebar () {
                   hasSubMenu &&
                   item.subMenu?.some(subItem => pathname === subItem.href)
 
+                // Sub menu
                 if (hasSubMenu) {
                   return (
                     <Collapsible
@@ -288,7 +290,12 @@ export default function AppSidebar () {
                           </svg>
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
-                      <CollapsibleContent className='mt-2 ml-4 space-y-1'>
+                      <CollapsibleContent
+                        className={cn(
+                          'mt-2 ml-4 space-y-1 overflow-hidden',
+                          'transition-all duration-200 data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down'
+                        )}
+                      >
                         {item.subMenu?.map((subItem, subIndex) => {
                           const isSubItemActive = pathname === subItem.href
                           return (
@@ -299,7 +306,7 @@ export default function AppSidebar () {
                               <Link
                                 href={subItem.href || '/under-development'}
                                 onClick={e => {
-                                  e.stopPropagation() // Prevent bubbling to CollapsibleTrigger
+                                  e.stopPropagation()
                                 }}
                                 className={cn(
                                   `${

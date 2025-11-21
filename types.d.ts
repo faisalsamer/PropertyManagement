@@ -60,7 +60,7 @@ export type Expense = {
 export type Tenant = {
   id: string
   tenant_name: string
-  tenant_picture: string
+  tenant_picture?: string
   identity_no: string
   phone_no: string
   email: string
@@ -71,7 +71,7 @@ export type Tenant = {
 export type Owner = {
   id: string
   owner_name: string
-  owner_picture: string
+  owner_picture?: string
   phone_no: string
   email: string
   property_count: number
@@ -120,12 +120,7 @@ export type Task = {
   assignee_name?: string
   assignee_picture?: string
   assignment_timestamp: string // ISO Timestamp
-  status:
-    | 'Resolved'
-    | 'Open'
-    | 'Closed'
-    | 'In Progress'
-    | 'Pending Review'
+  status: 'Resolved' | 'Open' | 'Closed' | 'In Progress' | 'Pending Review'
 }
 
 export type Notice = {
@@ -135,12 +130,35 @@ export type Notice = {
   type: string
   created_at: string // ISO Timestamp
   effective_date: string // ISO Timestamp
-  posted_by: string 
-  audience: 'All Staff & Tenants' | 'Specific Recipients' | 'All Staff' | 'All Tenants' | 'Tenants With Overdue Payment'
+  posted_by: string
+  audience:
+    | 'All Staff & Tenants'
+    | 'Specific Recipients'
+    | 'All Staff'
+    | 'All Tenants'
+    | 'Tenants With Overdue Payment'
 }
 
 export type ComboBoxitemsType = {
   avatar?: string | React.ReactNode
   label: string
   subtitle?: string
+}
+
+export type Crumb = {
+  label: string | indefined
+  href?: string // last item should not have href
+}
+
+export type ChargeTypeType = {
+  type: string
+  taxable: boolean
+  refundable: boolean
+}
+
+export type PaymentType = { type: string; isRecurrable?: boolean }
+
+export type TabType = {
+  label: string
+  isSelected: boolean
 }

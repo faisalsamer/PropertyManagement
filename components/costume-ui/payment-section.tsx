@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import CollapsibleSection from './collapsible-section'
 import InnerSection from './collapsible-inner-section'
-import RadioGroup from './radio-group'
 import InputGroup from './input-group'
 import Input from './input'
 import { cn } from '@/lib/utils'
@@ -10,9 +9,10 @@ import Select from './select'
 import Button from './button'
 import { Plus } from 'lucide-react'
 import { Checkbox } from '../ui/checkbox'
+import { chargeTypes } from '@/utils/data'
 
 // Sub component: CheckAddon
-const CheckAddon = ({ label }: { label: string }) => {
+export const CheckAddon = ({ label }: { label: string }) => {
   return (
     <>
       <div className='flex items-center gap-2.5 h-10'>
@@ -34,18 +34,7 @@ const PaymentSection = ({
 }: Props) => {
   const [selectedDay, setSelectedDay] = useState<number>(1)
   const daysOfMonth: number[] = Array.from({ length: 28 }, (_, i) => i + 1)
-  type chargeTypesType = {
-    type: string
-    taxable?: boolean
-    refundable?: boolean
-  }
-  const chargeTypes: chargeTypesType[] = [
-    { type: 'First Month Rental', taxable: true },
-    { type: 'Earnest Deposit', refundable: true },
-    { type: 'Security Deposit', refundable: true },
-    { type: 'Utility Deposit', refundable: true },
-    { type: 'Legal Fees' }
-  ]
+
   return (
     <CollapsibleSection number={sectionNumber} title={title}>
       <InnerSection
@@ -85,12 +74,6 @@ const PaymentSection = ({
           <CheckAddon label='Taxable (SST 8%)' />
           <CheckAddon label='Refundable' />
         </InputCard>
-        <Button
-          variant='secondary'
-          icon={<Plus />}
-          label='Add Charge'
-          isResponsive={false}
-        />
 
         <div
           className={cn(

@@ -1,8 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import Link from 'next/link'
 import Button from '@/components/costume-ui/button'
-import { SaveButtonIcon } from '@/components/costume-ui/icon'
 import CollapsibleSection from '@/components/costume-ui/collapsible-section'
 import InputGroup from '@/components/costume-ui/input-group'
 import Input from '@/components/costume-ui/input'
@@ -17,12 +15,10 @@ import InnerSection from '@/components/costume-ui/collapsible-inner-section'
 import ReminderSection from '@/components/costume-ui/reminder-section'
 import PaymentSection from '@/components/costume-ui/payment-section'
 import { useSingleSelectOption } from '@/hooks/useSingleSelectOption'
+import AddPageHead from '@/components/costume-ui/add-page-head'
 
 // Main compoennt
 const AddProperty = () => {
-  const styles = {
-    inputsContainer: 'grid grid-cols-2 gap-5 items-start'
-  }
   const projectTitle: string[] = projectsData.map(project => project.name)
   const { options, selectByIndex } = useSingleSelectOption([
     {
@@ -51,24 +47,14 @@ const AddProperty = () => {
   return (
     <div className='flex flex-col gap-5'>
       {/* Head section */}
-      <section className='flex flex-col gap-2.5'>
-        <div className='flex gap-[5] texts-body-small text-(--text-secondary)'>
-          <Link href={'/properties'} className='hover:underline '>
-            Properties
-          </Link>
-          <span>/</span>
-          <span className='text-(--text-primary)'>Add Property</span>
-        </div>
-        <div className='flex items-center justify-between w-full'>
-          <div>
-            <h2>Add a property</h2>
-            <span className='texts-body-medium text-(--text-secondary)'>
-              Add a new property to your management dashboard
-            </span>
-          </div>
-          <Button icon={<SaveButtonIcon />} label='Save' />
-        </div>
-      </section>
+      <AddPageHead
+        crumb_items={[
+          { label: 'Properties', href: '/properties' },
+          { label: 'Add Property' }
+        ]}
+        title='Add a property'
+        subtitle='Add a new property to your management dashboard'
+      />
 
       {/* Property Details Section */}
       <CollapsibleSection number={1} title='Property Details'>
@@ -77,7 +63,7 @@ const AddProperty = () => {
           title='Basic Details'
           subtitle='Enter the property details'
         >
-          <div className={styles.inputsContainer}>
+          <div className='inputs-container'>
             <InputGroup label='Code' isRequired>
               <Input placeholder='E.g. B-2-1' maxLength={20} required />
             </InputGroup>
@@ -86,6 +72,7 @@ const AddProperty = () => {
                 items={projectTitle}
                 label='Projects'
                 placeholder='Select a project'
+                required
               />
             </InputGroup>
           </div>
@@ -100,7 +87,7 @@ const AddProperty = () => {
               required
             />
           </InputGroup>
-          <div className={styles.inputsContainer}>
+          <div className='inputs-container'>
             <InputGroup label='City' isRequired>
               <Input placeholder='E.g. Ayer Keroh' maxLength={100} required />
             </InputGroup>
@@ -130,7 +117,7 @@ const AddProperty = () => {
           title='Property Type'
           subtitle='Select the type of property'
         >
-          <div className={styles.inputsContainer}>
+          <div className='inputs-container'>
             {options.map((option, index) => (
               <Option
                 key={index}

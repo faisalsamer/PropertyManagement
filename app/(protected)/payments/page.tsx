@@ -1,12 +1,9 @@
 import { cn } from '@/lib/utils'
 import SearchInput from '@/components/costume-ui/search-input'
 import Button from '@/components/costume-ui/button'
-import {
-  AddButtonIcon,
-  DeleteButtonIcon
-} from '@/components/costume-ui/icon'
+import { AddButtonIcon, DeleteButtonIcon } from '@/components/costume-ui/icon'
 import PaymentsTable from '@/components/tables/PaymentsTable'
-
+import Link from 'next/link'
 
 const Payments = () => {
   return (
@@ -26,10 +23,12 @@ const Payments = () => {
             className='bg-(--error-main)!'
           />
 
-          <Button
-            icon={<AddButtonIcon className='text-neutral-300' />}
-            label='Add Payment'
-          />
+          <Link href='/payments/add-payment'>
+            <Button
+              icon={<AddButtonIcon className='text-neutral-300' />}
+              label='Add Payment'
+            />
+          </Link>
         </div>
       </div>
       {/* Table */}

@@ -4,6 +4,7 @@ import Button from '@/components/costume-ui/button'
 import { AddButtonIcon, DeleteButtonIcon } from '@/components/costume-ui/icon'
 import ExpensesTable from '@/components/tables/ExpensesTable'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import Link from 'next/link'
 
 const Expenses = () => {
   return (
@@ -23,10 +24,12 @@ const Expenses = () => {
             className='bg-(--error-main)!'
           />
 
-          <Button
-            icon={<AddButtonIcon className='text-neutral-300' />}
-            label='Add Expense'
-          />
+          <Link href='/expenses/add-expense'>
+            <Button
+              icon={<AddButtonIcon className='text-neutral-300' />}
+              label='Add Expense'
+            />
+          </Link>
         </div>
       </div>
       {/* Table */}
